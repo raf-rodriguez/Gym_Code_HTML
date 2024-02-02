@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Fitness</title>
+</head>
+<body>
+
+    <h2>Calculadora de Fitness</h2>
+
+    <nav>
+        <a href="Guia Nutricion Principal.html">Principal</a>
+        <a href="Calculadora.html">Calculadora</a>
+        <a href="Programa de Ejercicio.html">Calendario</a>
+    </nav>
+    <br>
+
+    <label for="peso">Peso (libras):</label>
+    <input type="number" id="peso" placeholder="Ingrese su peso en libras">
+
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" placeholder="Ingrese su edad">
+
+    <label for="alturaPies">Altura (pies):</label>
+    <input type="number" id="alturaPies" placeholder="Ingrese su altura en pies">
+
+    <label for="alturaPulgadas">Altura (pulgadas):</label>
+    <input type="number" id="alturaPulgadas" placeholder="Ingrese su altura en pulgadas">
+
+    <label for="nivelActividad">Nivel de Actividad:</label>
+    <select id="nivelActividad">
+        <option value="1.2">Sedentario (poco o ningún ejercicio)</option>
+        <option value="1.375">Ligero (ejercicio ligero / deportes 1-3 días/semana)</option>
+        <option value="1.55">Moderado (ejercicio moderado / deportes 3-5 días/semana)</option>
+        <option value="1.725">Activo (ejercicio fuerte / deportes 6-7 días/semana)</option>
+        <option value="1.9">Muy Activo (trabajo físico o ejercicio intenso y entrenamiento 2 veces al día)</option>
+    </select>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calcular() {
+            var peso = parseFloat(document.getElementById('peso').value);
+            var edad = parseInt(document.getElementById('edad').value);
+            var alturaPies = parseInt(document.getElementById('alturaPies').value);
+            var alturaPulgadas = parseInt(document.getElementById('alturaPulgadas').value);
+            var nivelActividad = parseFloat(document.getElementById('nivelActividad').value);
+
+            if (isNaN(peso) || isNaN(edad) || isNaN(alturaPies) || isNaN(alturaPulgadas)) {
+                alert('Por favor, ingrese números válidos.');
+                return;
+            }
+
+            var alturaTotal = (alturaPies * 12) + alturaPulgadas; // Convertir la altura a pulgadas
+            var pesoKg = peso * 0.453592; // Convertir peso de libras a kilogramos
+
+            // Fórmula de Harris-Benedict para calcular el metabolismo basal (MB)
+            var mb = 66.47 + (13.75 * pesoKg) + (5.003 * alturaTotal) - (6.755 * edad);
+
+            // Calorías totales necesarias (considerando el nivel de actividad)
+            var caloriasTotales = mb * nivelActividad;
+
+            var result = `Calorías Diarias Recomendadas: ${caloriasTotales.toFixed(2)} kcal`;
+
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>

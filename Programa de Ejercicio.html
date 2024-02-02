@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Días</title>
+</head>
+<body>
+
+  <h2>Programa de Ejercicios</h2>
+
+  <nav>
+    <a href="Guia Nutricion Principal.html">Principal</a>
+    <a href="Calculadora.html">Calculadora</a>
+    <a href="Programa de Ejercicio.html">Calendario</a>
+</nav>
+<br>
+
+  <label for="password">Contraseña del Administrador:</label>
+  <input type="password" id="password" placeholder="Ingresa la contraseña">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Lunes</th>
+        <th>Martes</th>
+        <th>Miércoles</th>
+        <th>Jueves</th>
+        <th>Viernes</th>
+        <th>Sábado</th>
+        <th>Domingo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><textarea id="lunes" placeholder="Ingresa el contenido" readonly></textarea></td>
+        <td><textarea id="martes" placeholder="Ingresa el contenido" readonly></textarea></td>
+        <td><textarea id="miercoles" placeholder="Ingresa el contenido" readonly></textarea></td>
+        <td><textarea id="jueves" placeholder="Ingresa el contenido" readonly></textarea></td>
+        <td><textarea id="viernes" placeholder="Ingresa el contenido" readonly></textarea></td>
+        <td><textarea id="sabado" placeholder="Ingresa el contenido" readonly></textarea></td>
+        <td><textarea id="domingo" placeholder="Ingresa el contenido" readonly></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button onclick="habilitarEdicion()">Habilitar Edición</button>
+  <button onclick="guardarInformacion()">Guardar Información</button>
+
+  <script>
+    const adminPassword = "@gosto"; // Reemplaza "tucontrasena" con la contraseña real
+
+    function habilitarEdicion() {
+      const inputPassword = document.getElementById('password').value;
+
+      if (inputPassword === adminPassword) {
+        habilitarEdicionCeldas();
+      } else {
+        alert("Contraseña incorrecta. No tienes permiso para editar.");
+      }
+    }
+
+    function habilitarEdicionCeldas() {
+      const celdas = document.querySelectorAll('table td textarea');
+
+      celdas.forEach(celda => {
+        celda.removeAttribute('readonly');
+      });
+    }
+  </script>
+
+</body>
+</html>
+
